@@ -1,10 +1,6 @@
 $(document).ready(function(){
 	var anim_time = 200;
 	$(".alert").alert();
-	var close_alert = function() {
-		$("#error").hide();
-		$("#message").hide();
-	};
 	var handle_button = function(h) {
 		$("#error").hide();
 		$("#message").hide();

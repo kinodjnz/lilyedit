@@ -2,8 +2,6 @@ require "sinatra/base"
 require "sinatra/config_file"
 require "sass"
 require "haml"
-require "warden"
-require "sequel"
 require "json"
 
 module Lilyedit
