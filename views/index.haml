@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %title Lilypond editor
+    %link{:href => "css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "css/base.css", :rel => "stylesheet"}
+  %body
+    %h1 Lilypond editor
+    %div#message.alert.alert-success.fade.in
+      %button.close{:type => "button", "data-dismiss" => "alert"} &times;
+      %p#message-text
+    %div#error.alert.alert-error.fade.in
+      %button.close{:type => "button", "data-dismiss" => "alert"} &times;
+      %p#error-text
+    %form{:action => "#"}
+      #editor-box
+        #editor<
+          :preserve
+            \version "2.14.2"
+            \language "deutsch"
+            \header {
+              title = \markup {"タイトル"}
+              tagline = ##f
+            }
+            part = \relative c' {
+              \clef treble
+              c4 d e2 \bar "|."
+            }
+            \score {
+              \new Staff \part
+            }
+    %script{:type => "text/javascript", :src => "js/jquery-1.10.2.min.js", :charset => "utf-8"}
+    %script{:type => "text/javascript", :src => "js/bootstrap.min.js", :charset => "utf-8"}
+    %script{:type => "text/javascript", :src => "js/ace/ace.js", :charset => "utf-8"}
+    %script{:type => "text/javascript", :src => "js/lily.js", :charset => "utf-8"}
+    %div
+      %button#create_button.btn{"data-loading-text" => "作成中..."} 作成

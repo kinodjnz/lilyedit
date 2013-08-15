@@ -1,0 +1,42 @@
+!!!
+%html
+  %head
+    %meta{:charset => "utf-8"}
+    %title Lilypond editor
+    %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "/css/base.css", :rel => "stylesheet"}
+    :javascript
+      fileid = #{@fileid}
+  %body
+    %h1 Lilypond editor
+    %div#message.alert.alert-success.fade.in
+      %button.close{:type => "button", "data-dismiss" => "alert"} &times;
+      %p#message-text
+    %div#error.alert.alert-error.fade.in
+      %button.close{:type => "button", "data-dismiss" => "alert"} &times;
+      %p#error-text
+    %ul.breadcrumb
+      %li
+        %a{:href => "/"} Home
+        %span.divider /
+      %li
+        %a{:href => "/le/#{@fileid}"}>< #{@fileid}
+    %form{:action => "#"}
+      #editor-box
+        #editor<
+          :preserve
+            #{@code}
+    %script{:type => "text/javascript", :src => "/js/jquery-1.10.2.min.js", :charset => "utf-8"}
+    %script{:type => "text/javascript", :src => "/js/bootstrap.min.js", :charset => "utf-8"}
+    %script{:type => "text/javascript", :src => "/js/ace/ace.js", :charset => "utf-8"}
+    %script{:type => "text/javascript", :src => "/js/lily.js", :charset => "utf-8"}
+    %div
+      %button#save_button.btn{"data-loading-text" => "保存中..."} 保存
+      %button#compile_button.btn{"data-loading-text" => "処理中..."} コンパイル
+      %a#output_link{:href => "#", :target => "scorepdf"} 譜面を見る
+    %div
+      %div
+        %a#collapse-response{:href => "#"}
+          コンパイルメッセージ
+      %div#response
+        %textarea#response-text{:readonly => "readonly"}
