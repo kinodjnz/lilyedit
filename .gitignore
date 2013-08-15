@@ -1,0 +1,7 @@
+.bundle
+.ruby-version
+.sass-cache
+*.lock
+public/ly/*.ly
+public/output/*.pdf
+vendor
