@@ -13,10 +13,13 @@ module Lilyedit
     configure do
       register Sinatra::ConfigFile
       config_file ConfigPath
-      App.lilypond_path = settings.lilypond_path
+      config = settings.config
+      @@lilypond_path = config.fetch("lilypond_path", "lilypond")
+      @@lilypond_version = config.fetch("lilypond_version", "2.14.2")
     end
 
     get '/' do
+      @lilypond_version = @@lilypond_version
       haml :index
     end
     get '/le/:fileid' do
@@ -64,7 +67,7 @@ module Lilyedit
         filename = File.join(LyPath, fileid + ".ly")
         output = File.join(OutputPath, fileid)
         pipe_r, pipe_w = IO.pipe
-        pid = spawn(App.lilypond_path, "-o", output, filename, [:err, :out] => pipe_w)
+        pid = spawn(@@lilypond_path, "-o", output, filename, [:err, :out] => pipe_w)
         pipe_w.close
         pid, stat = Process.waitpid2(pid)
         response = pipe_r.read
